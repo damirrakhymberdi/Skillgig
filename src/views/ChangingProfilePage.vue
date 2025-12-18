@@ -152,7 +152,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/useAuthStore'
-import { updateExpertProfile } from '@/services/userService'
+import { updateExpertProfile } from '@/services/userservice'
 
 const router = useRouter()
 const authStore = useAuthStore()

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { fetchCurrentUser } from '@/services/userService'
+import { fetchCurrentUser } from '@/services/userservice'
 
 const AUTH_STORAGE_KEY = 'skillgig_auth'
 

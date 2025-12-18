@@ -289,7 +289,7 @@ import { storeToRefs } from 'pinia'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/useAuthStore'
 import { fetchMyQuestions, fetchMyAnswers } from '@/services/questionsService'
-import { fetchUserById } from '@/services/userService'
+import { fetchUserById } from '@/services/userservice'
 import { parseSkillsParam } from '@/utils/profileFallback'
 import profileImage from '@/assets/images/profile.jpg'
 
