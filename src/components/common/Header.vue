@@ -1,4 +1,4 @@
-  x<template>
+<template>
   <header class="site-header">
     <div class="header-surface">
       <div class="header-content">
