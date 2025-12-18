@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        env:
+          VITE_API_URL: http://localhost:8000/api/v1
+        run: npm run build
+
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install deps
+        run: pip install -r backend/requirements.txt
+
+      - name: Import check
+        env:
+          APP_ENVIRONMENT: test
+          APP_SECRET_KEY: ci-secret
+          APP_DATABASE_URL: sqlite:///./backend/data/app.db
+          APP_CORS_ORIGINS: http://localhost:5174
+        run: |
+          python -m compileall backend/app
+          python -c "import sys; sys.path.insert(0,'backend'); import app.main; print('backend ok')"
+
+

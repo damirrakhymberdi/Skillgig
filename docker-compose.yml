@@ -1,0 +1,21 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: skillgig-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - skillgig-data:/app/data
+    environment:
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT:-development}
+      APP_SECRET_KEY: ${APP_SECRET_KEY:-super-secret-change-me}
+      APP_DATABASE_URL: sqlite:///./data/app.db
+      APP_ACCESS_TOKEN_EXPIRE_MINUTES: 1440
+      APP_REFRESH_TOKEN_EXPIRE_MINUTES: 10080
+      APP_CORS_ORIGINS: http://localhost:5173,http://127.0.0.1:5173,http://localhost:4173,http://localhost:5174,http://127.0.0.1:5174,http://localhost:4174
+    restart: unless-stopped
+
+volumes:
+  skillgig-data:
