@@ -1,4 +1,4 @@
-# SkillGig (pet_last_maks)
+# SkillGig 
 
 Monorepo:
 - **Frontend**: Vue 3 + Vite (port **5174**)
