@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 60 * 24  # 24 hours
     refresh_token_expire_minutes: int = 60 * 24 * 7  # 7 days
     database_url: str = Field(default="sqlite:///./data/app.db")
+    
+    # CORS origins - ЖАҢАРТЫЛДЫ! 🔥
     cors_origins: Union[List[str], str] = Field(
         default=[
             "http://localhost:5173",
@@ -21,6 +23,7 @@ class Settings(BaseSettings):
             "http://localhost:5174",
             "http://127.0.0.1:5174",
             "http://localhost:4174",
+            "https://skillgigitplatform.vercel.app",  # ⭐ Production URL қосылды!
         ]
     )
     environment: str = "development"
@@ -43,4 +46,3 @@ class Settings(BaseSettings):
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
-

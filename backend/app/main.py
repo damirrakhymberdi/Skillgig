@@ -46,4 +46,3 @@ def read_root():
 
 def create_app():
     return app
-
