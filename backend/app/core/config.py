@@ -26,6 +26,9 @@ class Settings(BaseSettings):
             "https://skillgigitplatform.vercel.app",  # ⭐ Production URL қосылды!
         ]
     )
+    # Optional regex for additional allowed origins (useful for Vercel preview URLs)
+    # Example: ^https://.*\\.vercel\\.app$
+    cors_origin_regex: str | None = Field(default=None)
     environment: str = "development"
 
     model_config = SettingsConfigDict(

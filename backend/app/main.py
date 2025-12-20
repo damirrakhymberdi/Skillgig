@@ -12,13 +12,16 @@ app = FastAPI(title=settings.app_name, openapi_url=f"{settings.api_prefix}/opena
 
 # CORS
 # - development: allow all (easy local dev)
-# - production: restrict to configured origins
-allow_origins = ["*"] if settings.environment.lower() == "development" else settings.cors_origin_list
+# - production: restrict to configured origins (+ optional regex for preview URLs)
+is_development = settings.environment.lower() == "development"
+allow_origins = ["*"] if is_development else settings.cors_origin_list
 allow_credentials = False if allow_origins == ["*"] else True
+allow_origin_regex = None if is_development else settings.cors_origin_regex
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
+    allow_origin_regex=allow_origin_regex,
     allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
