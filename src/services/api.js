@@ -1,4 +1,10 @@
-const DEFAULT_BASE_URL = 'http://localhost:8000/api/v1'
+// NOTE:
+// - In dev we default to local backend.
+// - In production we default to Railway backend to avoid broken deployments when VITE_API_URL is not set.
+//   You can (and should) override via VITE_API_URL in Vercel project env vars.
+const DEFAULT_BASE_URL = import.meta.env.DEV
+    ? 'http://localhost:8000/api/v1'
+    : 'https://skillgig-production.up.railway.app/api/v1'
 const AUTH_STORAGE_KEY = 'skillgig_auth'
 const normalizeTokenType = (type) => {
     if (!type) {
